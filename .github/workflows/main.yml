@@ -49,9 +49,9 @@ jobs:
         uses: appleboy/scp-action@v0.1.7
         with:
           host: ${{ secrets.EC2_HOST }}
-          username: ec2-user
+          username: root
           key: ${{ secrets.EC2_KEY }}
-          source: "target/datastore-0.0.7.jar"
+          source: "backend/target/datastore-0.0.7.jar"
           target: "/home/ec2-user/app/"
 
       # 7️⃣ Stop Old Application
