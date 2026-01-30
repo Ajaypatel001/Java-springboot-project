@@ -43,6 +43,14 @@ jobs:
       - name: Build JAR
         run: mvn clean package -DskipTests=true
         working-directory: backend
+      - name: Remove old JAR
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ec2-user
+          key: ${{ secrets.EC2_KEY }}
+          script: |
+            sudo rm -f /home/ec2-user/app/backend/target/datastore-0.0.7.jar
 
       # 6️⃣ Copy JAR to EC2
       - name: Upload JAR to EC2
